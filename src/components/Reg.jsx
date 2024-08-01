@@ -39,10 +39,10 @@ const Reg = () => {
                   });
             })
             .catch((error) => {
+                toast.error("Complete all task");
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                console.log(errorMessage);
-                console.log(errorCode);
+                
             });
     }
    
