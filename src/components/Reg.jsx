@@ -49,7 +49,7 @@ const Reg = () => {
   return (
     <div className="  mt-[100px] py-[50px] w-[400px] mx-auto bg-[#33FFC1] rounded-[10px]">
 
-        <div className=" pt-[50px]">
+        <div className=" pt-[10px]">
             <h3 className='text-[24px] font-sans text-[#262626] text-center font-bold'>Sign Up</h3>
         </div>
 

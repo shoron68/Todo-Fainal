@@ -3,6 +3,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
+  import { Link } from 'react-router-dom';
 
 
 const Login = () => {
@@ -35,7 +36,7 @@ const Login = () => {
 
 
   return (
-    <div className=" mt-[100px] py-[50px] w-[300px] mx-auto bg-[#33FFC1] rounded-[10px]">
+    <div className=" mt-[100px] py-[50px] w-[400px] mx-auto bg-[#33FFC1] rounded-[10px]">
 
         <div className=" ">
             <h3 className='text-[24px] font-sans text-[#262626] text-center font-bold'>Log in</h3>
@@ -51,6 +52,10 @@ const Login = () => {
         <button onClick={handleLogIn}  className='py-[10px] px-[40px] border-[1px] rounded-[10px] bg-[#5233FF] text-[#fff]'>Log In</button>
         <ToastContainer />
         </div>
+        <div className="text-center pt-[10px]">
+            <p>Don't have an account? <span className='text-[#FF3349]'><Link to="/">Register</Link></span></p>
+        </div>
+
         </div>
     </div>
   )
