@@ -2,15 +2,19 @@ import React, { useState } from 'react'
 import { getAuth, createUserWithEmailAndPassword,updateProfile  } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { getDatabase, ref, set } from "firebase/database";
+import { FaEye,FaEyeSlash  } from "react-icons/fa";
 
 
 const Reg = () => {
     const auth = getAuth();
+    const db = getDatabase();
     let [email,setEmail] = useState("")
     let [name,setName] = useState("")
     let [password,setPassword] = useState("")
     let navigate = useNavigate()
+    let [show,setShow] = useState(false)
 
     let handleEmail = (e)=>{
         setEmail(e.target.value);
@@ -34,7 +38,15 @@ const Reg = () => {
                     setTimeout(()=>{
                         navigate("/login")
                     },1000)
-                  }).catch((error) => {
+                    
+                  }).then(()=>{
+                    set(ref(db, 'users/' + user.user.uid), {
+                        username: name,
+                        email: email,
+                        
+                      });
+                })
+                .catch((error) => {
                     
                   });
             })
@@ -62,8 +74,11 @@ const Reg = () => {
         <div className=" mt-[30px] flex justify-center">
         <input onChange={handleEmail} type="email" placeholder='Email' className='py-[8px] pr-[30px]  border-b-[1px] border-[#26262649] outline-none bg-transparent text-[#262626]' />
         </div>
-        <div className="mt-[30px] flex justify-center">
-        <input onChange={handlePassword} type="password" placeholder='password' className='py-[8px] pr-[30px]  border-b-[1px] border-[#26262649] outline-none bg-transparent text-[#262626]' />
+        <div className="mt-[30px] flex justify-center relative">
+        <input onChange={handlePassword} type={show == true ? "text": "password" } placeholder='Password' className='py-[8px] pr-[30px]  border-b-[1px] border-[#26262649] outline-none bg-transparent text-[#262626]' />
+        <div onClick={()=>setShow(!show)} className="absolute right-[100px] top-[50%] translate-y-[-50%]">
+            {show == true ? <FaEyeSlash/> : <FaEye/>}
+        </div>
         </div>
         <div className="text-center pt-[10px]">
         <button onClick={handleSignUp} className='py-[10px] px-[40px]  rounded-[10px] bg-[#5233ffd5] text-[#fff]'>Sign up</button>

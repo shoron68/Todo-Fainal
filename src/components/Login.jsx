@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
-  import { Link } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom';
+import { FaEye,FaEyeSlash  } from "react-icons/fa";
 
 
 const Login = () => {
@@ -11,6 +12,7 @@ const Login = () => {
     let [email ,setEmail] = useState()
     let [password ,setpassword] = useState()
     let navigate = useNavigate()
+    let [show,setShow] = useState(false)
 
     let handleEmail =(e)=>{
         setEmail(e.target.value)
@@ -45,8 +47,11 @@ const Login = () => {
         <div className=" flex justify-center">
         <input onChange={handleEmail}  type="email" placeholder='Email' className='py-[8px] pr-[30px]  border-b-[1px] border-[#26262649] outline-none bg-transparent text-[#262626]' />
         </div>
-        <div className="mt-[30px] flex justify-center">
-        <input onChange={handlePassword}  type="password" placeholder='password' className='py-[8px] pr-[30px]  border-b-[1px] border-[#26262649] outline-none bg-transparent text-[#262626]' />
+        <div className="mt-[30px] flex justify-center relative">
+        <input onChange={handlePassword}  type={show == true ? "text": "password" } placeholder='password' className='py-[8px] pr-[30px]  border-b-[1px] border-[#26262649] outline-none bg-transparent text-[#262626]' />
+        <div onClick={()=>setShow(!show)} className="absolute right-[100px] top-[50%] translate-y-[-50%]">
+            {show == true ? <FaEyeSlash/> : <FaEye/>}
+        </div>
         </div>
         <div className="text-center pt-[10px]">
         <button onClick={handleLogIn}  className='py-[10px] px-[40px] border-[1px] rounded-[10px] bg-[#5233FF] text-[#fff]'>Log In</button>
