@@ -29,7 +29,7 @@ const Login = () => {
                 },2000)
             })
             .catch((error) => {
-                toast.error("Invalid username or password");
+                toast.error("Invalid Email or Password");
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log(errorMessage);
